@@ -1,0 +1,309 @@
+﻿* {
+    margin:0px;
+    padding:0px;
+}
+
+body {
+    background: url("../img/background.jpg") center center;
+}
+
+.topo {
+    width: 100%;
+    height: 60px;
+    background: #3379bd;
+    box-shadow: 1px 4px 11px #868080;
+}
+
+h4.titulo-topo {
+    margin: 0px;
+    padding: 16px;
+    color: rgb(255, 255, 255);
+    font-family: segoe UI Black;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.geral {
+    margin: 0px 10px;
+}
+
+.continuar-conectado{
+    margin:10px 0px;
+}
+
+.rodape {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.btn-back{
+    margin:0px 20px 6px 0px;
+    cursor:pointer;
+
+}
+
+.titulo-conteudo {
+    font-family: segoe UI Black;
+    font-weight: bold;
+    margin: 30px 20px;
+    color: #B3B3B3;
+}
+
+.menu-principal{
+    font-size:20px;
+    margin:40px 0px;
+}
+
+ul.menu-principal li {
+    list-style: none;
+    margin: 5px 0px;
+}
+
+img.img-menu-principal{
+    margin-right:20px;
+}
+
+.logo-topo{
+    float:left;
+    margin: 10px 20px 10px 20px;
+}
+
+.sair-topo {
+  float: right;
+  margin: -47px 8px 0px 0px;
+}
+
+.page-inicial {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    height: 100%;
+}
+
+.logo-page-inicial{
+    text-align: center;
+    padding: 10% 0px;
+    margin: 0px 20px;
+}
+
+.titulo-page-inicial{
+    font-weight:bold;
+    color:#fff;
+    font-size:28px;
+    text-shadow: 1px 2px 10px #000;
+}
+
+.sub-titulo-menu{
+    font-size: 12px;
+    color: #E48B06;
+    float: right;
+    font-weight: bold;
+}
+
+/*.btn-add {
+    position: fixed;
+    right: 15px;
+    z-index:999;
+    top: 16px;
+}*/
+
+.btn-add {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    background: #fff;
+    left: 0px;
+    padding: 13px;
+    text-align: center;
+    box-shadow: 0px 3px 6px #6F6F6F;
+    z-index: 9999;
+}
+
+.btn-add-img{
+    margin-right:10px;
+}
+
+.btn-acao{
+    position: absolute;
+    right: 90px;
+    top: 12px;
+}
+
+.listas-menu{
+    position: relative;
+    top: 90px;
+}
+
+.listas-topo{
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+}
+
+.img-user-perfil {
+    position: relative;
+    top: 90px;
+    text-align: center;
+    z-index: 1;
+}
+
+.listas-perfil {
+    position: relative;
+    top: 75px;
+}
+
+.produto{
+    position:relative;
+    top:0px;
+    margin-top:0px;
+}
+
+.list-produto{
+    height:200px;
+}
+
+.list-produto{
+    height:auto;
+}
+
+.info-produto{
+    margin-top: 105px;
+}
+
+.listas-produtos {
+    position: relative;
+    top: 95px;
+    display:none;
+}
+
+.listas-checkin {
+    position: relative;
+    top: 95px;
+}
+
+.pesquisar-produtos{
+    position: relative;
+    top: 60px;
+}
+
+.btn-produtos{
+    display:none;
+}
+
+.checkin-box{
+    position: relative;
+    bottom: 6px;
+}
+
+.subtitulo-produto{
+    font-size:12px;
+    color: #E48B46;
+    font-weight: bold;
+}
+
+.icone-remover-produto-checkin {
+    position: absolute;
+    right: 35px;
+    top: 50px;
+}
+
+.icone-add-lista {
+    position: absolute;
+    right: 35px;
+    bottom: 10px;
+}
+
+.bt-finalizar-checkin{
+    float: right;
+    margin-top: 16px;
+}
+
+.total-checkin{
+    float:left;
+}
+
+.add-produto-checkin{
+    margin-top: 110px;
+}
+
+.img-checkin{
+    cursor:pointer;
+}
+
+.edit-estabe{
+  float: right;
+  margin-right: 20px;
+}
+
+.iten-nome{
+  font-size: 35px;
+  color: orange;
+  font-weight: bold;
+  margin-top: 85px;
+}
+
+.nome-produto-riscar{
+  background-color: transparent;
+  text-decoration: none;
+  color: #000;
+  text-decoration: line-through;
+}
+
+.nome-produto-desriscar{
+  background-color: transparent;
+  text-decoration: none;
+  color: #000;
+}
+
+.modal{
+overflow:auto !important;
+}
+
+/* -- auto complete --*/
+
+.ui-autocomplete {
+position: fixed;
+top: 100%;
+left: 0;
+z-index: 1051 !important;
+float: left;
+display: none;
+min-width: 160px;
+width: 160px;
+padding: 4px 0;
+margin: 2px 0 0 0;
+list-style: none;
+background-color: #ffffff;
+border-color: #ccc;
+border-color: rgba(0, 0, 0, 0.2);
+border-style: solid;
+border-width: 1px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+-webkit-background-clip: padding-box;
+-moz-background-clip: padding;
+background-clip: padding-box;
+}
+ 
+ .ui-menu-item > a.ui-corner-all {
+display: block;
+padding: 3px 15px;
+clear: both;
+font-weight: normal;
+line-height: 18px;
+color: #555555;
+white-space: nowrap;
+text-decoration: none;
+}

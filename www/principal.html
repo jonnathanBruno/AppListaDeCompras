@@ -1,0 +1,137 @@
+﻿<html>
+<head>
+    <title>Compra Digital - Faça sua lista de compras e economize!</title>
+    <meta charset="utf-8" />
+    <link href="css/estilo.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+    <div class="page-inicial">
+        <div class="topo">
+            <img src="img/logo.png" width="40" class="logo-topo" />
+            <h4 class="titulo-topo">Página inicial</h4>
+        </div>
+		
+    <img src="img/sair.png" width="40" onclick="logout()" class="sair-topo" />
+
+        <!--<h3 class="titulo-conteudo">Início</h3>-->
+        <!--<div class="logo">
+            <img src="img/logo.png" width="70" />
+        </div>-->
+
+        <div class="geral">
+            <div class="conteudo">
+
+                <ul class="menu-principal">
+
+                    <li class="list-group-item">
+                        <a href="#" onclick="abrirModalCheckin('principal')">
+                            <img src="img/check.png" width="45" class="img-menu-principal" />CheckIn
+                        </a>
+                        <span class="sub-titulo-menu">Realize seu CheckIn</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="#" onclick="parent.location='listas.html'">
+                            <img src="img/list.png" width="40" class="img-menu-principal" /> Lista(s)
+                        </a>
+                        <span class="sub-titulo-menu">Crie novas listas</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="#" onclick="parent.location='estabelecimentos.html'">
+                            <img src="img/shop.png" width="42" class="img-menu-principal" /> Estabelecimentos
+                        </a>
+						<span class="sub-titulo-menu">Vizualize estabelecimentos</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="#" onclick="parent.location='produtos.html'">
+                            <img src="img/product.png" width="45" class="img-menu-principal" /> Produtos
+                        </a>
+                        <span class="sub-titulo-menu">Pesquise por produtos</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="#" onclick="parent.location='perfil.html'">
+                            <img src="img/user.png" width="45" class="img-menu-principal" /> Perfil
+                        </a>
+                        <span class="sub-titulo-menu">Altere seus dados</span>
+                    </li>
+
+                </ul>
+
+
+            </div>
+            <div class="rodape">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Checkin -->
+    <div class="modal fade" id="myModalCheckin" tabindex="-1" role="dialog" aria-labelledby="checkin" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><img src="img/check.png" width="20" /> Iniciar checkin </h4>
+                </div>
+                <div class="modal-body">
+                    <p>O checkin é para iniciar suas compras, escolha qual estabelecimento você vai fazer suas comprar e qual a lista.</p>
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><img src="img/search.png" width="20" /></span>
+                            <input type="text" class="form-control" id="estabCheckin" onkeyup="escolherEstabelecimento()" placeholder="Supermercado - Rua. Exemplo, Cidade/Estado" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Estcolha uma Lista: </label>
+                            <select class="form-control" id="listasCheckin">
+                            </select>
+                        </div>
+                       
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" onclick="iniciarCheckin('principal')" class="btn btn-primary">Iniciar checkin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="WS/usuarioWS.js"></script>
+    <script src="WS/checkInWS.js"></script>
+		<!-- auto complete -->
+	<script src="js/jquery-ui-1.10.3.js"></script>
+	<link rel="stylesheet" href="css/jquery-ui.css" /> 
+	
+	<script type="text/javascript">
+	window.onload = function(){
+		verificarLogin("principal");
+		getLocation();
+	}
+	</script> 
+	<script>
+		function getLocation() {
+			window.localStorage.lat = -5.8116513;
+			window.localStorage.lon = -35.2028728;
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else { 
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			}
+		}
+
+		function showPosition(position) {
+			window.localStorage.lat = position.coords.latitude;
+			window.localStorage.lon = position.coords.longitude;
+		}
+	</script>
+</body>
+</html>

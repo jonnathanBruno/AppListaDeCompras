@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>Compra Digital - Faça sua lista de compras e economize!</title>
+    <meta charset="utf-8" />
+    <link href="css/estilo.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+    <div class="page-inicial">
+        <div class="topo">
+            <h4 class="titulo-topo">
+                <img src="img/back.png" onclick="parent.location = 'perfil.html'" width="30" class="btn-back" />Nova Senha
+            </h4>
+        </div>
+
+        <div class="logo">
+            <img src="img/logo.png" width="70" />
+        </div>
+        <div class="geral">
+            <div class="conteudo">
+
+                <form class="bs-example bs-example-form" data-example-id="simple-input-groups">
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><img src="img/icon_password_input.png" width="20" /></span>
+                        <input type="text" class="form-control" id="senha" placeholder="Senha antiga" aria-describedby="basic-addon1">
+                    </div>
+
+                    <br />
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><img src="img/icon_password_input.png" width="20" /></span>
+                        <input type="text" class="form-control" id="novaSenha" placeholder="Nova senha" aria-describedby="basic-addon1">
+                    </div>
+
+                    <br />
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><img src="img/icon_password_input.png" width="20" /></span>
+                        <input type="text" class="form-control" id="confirmarSenha" placeholder="Confirmar senha" aria-describedby="basic-addon1">
+                    </div>
+
+                    <br />
+                    <button type="button" onclick="atualizarSenhaUsuario()" class="btn btn-primary btn-lg btn-block">Atualizar</button>
+
+                </form>
+
+            </div>
+            <div class="rodape">
+            </div>
+
+        </div>
+    </div>
+	<script src="WS/usuarioWS.js"></script>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

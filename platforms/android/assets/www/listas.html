@@ -1,0 +1,163 @@
+﻿<html>
+<head>
+    <title>Compra Digital - Faça sua lista de compras e economize!</title>
+    <meta charset="utf-8" />
+    <link href="css/estilo.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+    <div class="page-inicial">
+        <div class="topo listas-topo">
+            <h4 class="titulo-topo">
+                <img src="img/back.png" onclick="parent.location = 'principal.html'" width="30" class="btn-back" />
+                Minhas listas
+            </h4>
+        </div>
+
+        <!--<h3 class="titulo-conteudo">Início</h3>-->
+        <!--<div class="logo">
+            <img src="img/logo.png" width="70" />
+        </div>-->
+
+        <div class="geral">
+            <div class="conteudo" id="conteudo">
+
+				<!-- listas serão retornadas aqui-->
+
+            </div>
+            <div class="btn-add">
+                <a href="#" data-toggle="modal" data-target="#adicionarLista">
+                    <img src="img/add.png" class="btn-add-img" width="30" />
+                </a>
+                <a href="#" data-toggle="modal" data-target="#pesquisarLista">
+                    <img src="img/search.png" width="30" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicionar lista -->
+    <div class="modal fade add-produto-checkin" id="adicionarLista" tabindex="-1" role="dialog" aria-labelledby="checkin" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><img src="img/add.png" width="20" /> Adicionar lista </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Adicionar lista de compras.</p>
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><img src="img/search.png" width="20" /></span>
+                            <input type="text" class="form-control" id="nome_lista" placeholder="Nome da lista" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" onclick="criarLista()" class="btn btn-primary">Adicionar lista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	 <!-- Editar lista -->
+    <div class="modal fade add-produto-checkin" id="editarLista" tabindex="-1" role="dialog" aria-labelledby="checkin" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><img src="img/add.png" width="20" /> Editar lista </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Editar lista de compras.</p>
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><img src="img/search.png" width="20" /></span>
+                            <input type="text" class="form-control" id="novo_nome_lista" placeholder="Nome da lista" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" onclick="editarNomeLista()" class="btn btn-primary">Editar lista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pesquisar lista -->
+    <div class="modal fade add-produto-checkin" id="pesquisarLista" tabindex="-1" role="dialog" aria-labelledby="checkin" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><img src="img/search.png" width="20" /> Pesquisar lista </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Pesquisar lista de compras.</p>
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><img src="img/search.png" width="20" /></span>
+                            <input type="text" class="form-control" placeholder="Nome da lista" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" onclick="parent.location='checkin.html'" class="btn btn-primary">Pesquisar lista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Checkin -->
+    <div class="modal fade add-produto-checkin" id="iniciarCheckinLista" tabindex="-1" role="dialog" aria-labelledby="checkin" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><img src="img/check.png" width="20" /> Iniciar checkin </h4>
+                </div>
+                <div class="modal-body">
+                    <p>O checkin é para iniciar suas compras, escolha qual estabelecimento você vai fazer suas comprar e qual a lista.</p>
+                    <form>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><img src="img/search.png" width="20" /></span>
+                            <input type="text" class="form-control" placeholder="Supermercado - Rua. Exemplo, Cidade/Estado" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Estabelecimento: </label>
+                            <select class="form-control">
+                                <option>Checkin sem lista</option>
+                                <option>Lista A</option>
+                                <option>Lista B</option>
+                                <option>Lista C</option>
+                                <option>Lista D</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" onclick="parent.location='checkin.html'" class="btn btn-primary">Iniciar checkin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="WS/listaWS.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			retornarListas();
+		}
+	</script>  
+</body>
+</html>
