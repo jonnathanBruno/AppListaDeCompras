@@ -15,7 +15,7 @@ function abrirModalCheckin(flagCheckin){
 	if(flagCheckin == "principal" || flagCheckin=="estabelecimento"){
 		$.ajax({
 			type: 'POST'
-			, url: "http://192.168.56.1/Servidor/ListaDeProdutos.asmx/listarListas" 
+			, url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/listarListas" 
 			, crossDomain:true
 			, contentType: 'application/json; charset=utf-8'
 			, dataType: 'json'						
@@ -23,6 +23,16 @@ function abrirModalCheckin(flagCheckin){
 			, success: function (data, status){                    
 				var listas = $.parseJSON(data.d);
 				document.getElementById("listasCheckin").innerHTML = "";
+				
+					if(listas.length==0){
+						var select = document.createElement("option");
+						select.setAttribute("id","0");
+						select.innerHTML = "Nenhuma lista cadastrada";
+						var pai = document.getElementById("listasCheckin");
+						pai.appendChild(select);
+						return;
+					}
+					
 				
 					for(var i=0; i<listas.length; i++){
 
@@ -43,7 +53,7 @@ function abrirModalCheckin(flagCheckin){
 	if(flagCheckin == "principal" || flagCheckin=="lista"){
 		$.ajax({
 			type: 'POST'
-			, url: "http://192.168.56.1/Servidor/Estabelecimento.asmx/listarEstabelecimento"
+			, url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/listarEstabelecimento"
 			, crossDomain:true
 			, contentType: 'application/json; charset=utf-8'
 			, dataType: 'json'
@@ -73,15 +83,26 @@ function escolherEstabelecimento(){
 
 //__________________ INICIAR CHECKIN __________________________//
 function iniciarCheckin(flagCheckin){
+	
+
 	if(flagCheckin=="principal"){
 		var idLista = $("#listasCheckin").val();
 		window.localStorage.idListaClicada = idLista;
-	}	
+			if(document.getElementById("0") != null){
+				alert("Nenhuma lista cadastrada");
+				return;
+			}
+	}
+	
 	if(flagCheckin=="lista"){
 		var idLista = window.localStorage.idListaClicada;
 	}	
 	
 	if(flagCheckin=="estab"){
+			if(document.getElementById("0") != null){
+				alert("Nenhuma lista cadastrada");
+				return;
+			}
 		var idLista = $("#listasCheckin").val();
 		var queries = {};
 		$.each(document.location.search.substr(1).split('&'), function(c,q){
@@ -122,7 +143,7 @@ function retornarProdutosCheckIn(){
 
 	$.ajax({																		
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/ListaDeProdutos.asmx/retornarItens" 
+        , url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/retornarItens" 
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -150,17 +171,47 @@ function guardarItem(idProduto){
 	var checkBox = document.getElementById(idProduto);
 	var quantidade = parseFloat(document.getElementById(idProduto+"quant").title);
 	var precoProduto = parseFloat(document.getElementById(idProduto).alt);
+	var idProdutoEditado = document.getElementById(idProduto).accessKey;
+	var produtoCadastrado = document.getElementById(idProduto).align;
+	var storedProdutos = JSON.parse(document.getElementById(idProduto).lang);
 	
 	if(checkBox.checked == true){	
+	
 		document.getElementById(idProduto+"prod").className = "nome-produto-riscar";  		
 		total += quantidade*precoProduto;
 		document.getElementById("totalLista").innerHTML = "Total: R$ "+total.toFixed(2);
-
+		
+		if(idProdutoEditado != ""){
+			storedProdutos.id_produto = parseFloat(idProdutoEditado);
+			idProduto = parseFloat(idProdutoEditado);			
+		}else if(produtoCadastrado == "0"){
+			storedProdutos.id_produto = parseFloat(produtoCadastrado);
+			idProduto = parseFloat(produtoCadastrado);	
+		}
+		
+		itens[acessoItens++] =  storedProdutos;
+		console.log(itens);
 	}else{
+	
 		document.getElementById(idProduto+"prod").className = "nome-produto-desriscar";  		
 		total-= quantidade*precoProduto;
 		document.getElementById("totalLista").innerHTML = "Total: R$ "+total.toFixed(2);
-	
+		
+		if(idProdutoEditado != ""){
+			storedProdutos.id_produto = parseFloat(idProdutoEditado);
+			idProduto = parseFloat(idProdutoEditado);			
+		}else if(produtoCadastrado == "0"){
+			storedProdutos.id_produto = parseFloat(produtoCadastrado);
+			idProduto = parseFloat(produtoCadastrado);	
+		}	
+		
+		for(var i = itens.length - 1; i >= 0; i--) {
+			if(itens[i].id_produto === idProduto) {
+			   itens.splice(i, 1);
+			   acessoItens--;
+			}
+		}
+		console.log(itens);
 	}
 }
 
@@ -183,6 +234,7 @@ function editarPreco(){
 	var idProduto = window.localStorage.idProdutoAbertoModal;
 	var preco = document.getElementById(idProduto).alt;
 	var precoColocado = document.getElementById("preco").value;
+	var storedProdutos = JSON.parse(document.getElementById(idProduto).lang);
 	
 	if(preco.match(/^-?\d*\.?\d+$/) && precoColocado!="")
 	{
@@ -194,6 +246,26 @@ function editarPreco(){
 		
 		var valorPreco = document.getElementById(idProduto+"preco");
 		document.getElementById(idProduto).title = valorEditado;
+		
+		//------- atualiza id no array --------//
+			for(var i = itens.length - 1; i >= 0; i--) {
+				if(itens[i].id_produto == idProduto) {
+				   itens.splice(i, 1);
+				   acessoItens--;
+				}
+			}
+			
+			if(document.getElementById(idProduto).align == 0){
+				storedProdutos.id_produto = -0;
+				itens[acessoItens++] = storedProdutos;
+				document.getElementById(idProduto).accessKey = "-0";
+			}else{
+				storedProdutos.id_produto = parseFloat("-"+document.getElementById(idProduto).id);
+				itens[acessoItens++] = storedProdutos;
+				document.getElementById(idProduto).accessKey = "-"+document.getElementById(idProduto).id;
+			}	
+			
+		//-----------------------------------//	
 		document.getElementById(idProduto).alt = valorEditado;
 		
 		valorPreco.innerHTML = "R$ " +valorEditado;
@@ -237,7 +309,30 @@ function htmlListarProdutos2(produtos){
 		var preco = "Sem valor cadastrado";
 	else
 		var preco = "R$ "+(produtos.preco).toFixed(2);
-	
+		
+	/*--- Controle de proutos pré cadastrados no checkin ---*/
+		for(var j=0 ;j<produtosRecemAdicionado.length;j++){													//pecorrer string de idLista e idProdutos 
+			var stringListaProduto = produtosRecemAdicionado[j];											//id da lista e do produto
+			var idLista = "";																				//variavel id da lista
+			var id_produto = "";																			//variavel id do produto
+			for(var u=0;u<stringListaProduto.length;u++){													//for para repartir a string
+				if(stringListaProduto[u] != "-"){															//enquanto nao encontra a barra(-)
+					idLista+= stringListaProduto[u];														//salva o id da lista
+				}else{																						//se encontrou a barra(-)
+					id_produto = stringListaProduto.substring((u+1),stringListaProduto.length);				//salva o id do produto
+					break;
+				}
+			}
+			if(id_produto == produtos.nome && window.localStorage.listaClicadaCheckin == idLista ){			//se for algum produto recem adicionado na lista respectiva
+				var idProdutoAdicionado = 0;																			//o id desse produto será 0
+				break;
+			}else{																							//se nao for
+				var idProdutoAdicionado = produtos.id_produto;														//o id do produto será seu id de origem
+			}
+		}
+		/*------*/
+		
+	var jsonProdutos = JSON.stringify(produtos);	
 	conteudo.innerHTML = 
 	 "<ul class='menu-principal listas-checkin'>"
 	+	"<li class='list-group-item'>"
@@ -251,7 +346,7 @@ function htmlListarProdutos2(produtos){
 	+		"<div class='btn-acao'>"
 	+			"<div class='checkbox checkin-box'>"
 	+				"<label>"
-	+					"<input type='checkbox' alt='"+produtos.preco+"' title='"+preco+"' id='"+produtos.id_produto+"' onclick='guardarItem("+produtos.id_produto+")'>"
+	+					"<input type='checkbox' lang='"+jsonProdutos+"' align='"+idProdutoAdicionado+"' alt='"+produtos.preco+"' title='"+preco+"' id='"+produtos.id_produto+"' onclick='guardarItem("+produtos.id_produto+")'>"
 	+				"</label>"
 	+			"</div>"
 	+		"</div>"

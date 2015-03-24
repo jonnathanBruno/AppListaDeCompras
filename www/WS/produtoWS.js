@@ -19,7 +19,7 @@ function autoCompleteMarca(flagMarca){
 	
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Produto.asmx/autocompleteMarca"
+        , url: "http://192.168.1.99/Servidor/Produto.asmx/autocompleteMarca"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -39,7 +39,7 @@ function autoComplete(){
 	var nomeProduto = $("#nomeDoProduto").val();
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Produto.asmx/autocomplete"
+        , url: "http://192.168.1.99/Servidor/Produto.asmx/autocomplete"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -67,7 +67,7 @@ function autoCompleteLista(flag){
 
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Produto.asmx/autocomplete"
+        , url: "http://192.168.1.99/Servidor/Produto.asmx/autocomplete"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -108,19 +108,19 @@ window.pesquisarProdutos = function(flagProduto)
 	//------ Pesquisar por embalagem ----//
 	if(nome != "" && embalagem != 0){
 		dados =  "{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',marca:'"+marca+"',nome:'"+nome+"',embalagem:'"+embalagem+"'}"
-		url = "http://192.168.56.1/Servidor/Produto.asmx/pesquisarProdutosEmbalagem"
+		url = "http://192.168.1.99/Servidor/Produto.asmx/pesquisarProdutosEmbalagem"
 		passou=true;
 	}	
 	//------ Pesquisar por nome -----//
 	else if(nome != ""){
 		dados = "{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',marca:'"+marca+"',nome:'"+nome+"'}"
-		url   = "http://192.168.56.1/Servidor/Produto.asmx/pesquisarProdutosNome";
+		url   = "http://192.168.1.99/Servidor/Produto.asmx/pesquisarProdutosNome";
 		passou=true;
 	}	
 	//------ Pesquisar por marca -----//
 	else if(marca != ""){
 		dados = "{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',marca:'"+marca+"'}"
-		url = "http://192.168.56.1/Servidor/Produto.asmx/pesquisarProdutosMarca"	
+		url = "http://192.168.1.99/Servidor/Produto.asmx/pesquisarProdutosMarca"	
 		passou=true;
 	//------ Nenhum campo preenchido -------//	
 	}else{
@@ -241,7 +241,7 @@ function adicionarProdutoNaLista(flag){
 	var idProduto=parseInt(window.localStorage.idProdutoAdicionarLista);
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/ListaDeProdutos.asmx/cadastrarProduto"
+        , url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/cadastrarProduto"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -274,7 +274,7 @@ function adicionarProdutoNaLista(flag){
 function retornarItens(idProduto){
 	$.ajax({
             type: 'POST'
-            , url: "http://192.168.56.1/Servidor/Item.asmx/retornarItem"
+            , url: "http://192.168.1.99/Servidor/Item.asmx/retornarItem"
 			, crossDomain:true
             , contentType: 'application/json; charset=utf-8'
             , dataType: 'json'
@@ -322,11 +322,11 @@ function editarProduto(){
 	var idLista = parseInt(window.localStorage.idListaClicada);
 	var idProduto = parseInt(window.localStorage.idProdutoEditar);
 	
-	var url="http://192.168.56.1/Servidor/ListaDeProdutos.asmx/criarProduto";
+	var url="http://192.168.1.99/Servidor/ListaDeProdutos.asmx/criarProduto";
 	var data="{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',idLista:'"+idLista+"',idProduto:'"+idProduto+"',marca:'"+marca+"',nome:'"+nomeDoProduto+"',unidade:'"+unidade+"',embalagem:'"+embalagem+"',quantidade:'"+quantidade+"'}";
 	
 	if(codigoDeBarras.trim() !=''){
-		url="http://192.168.56.1/Servidor/ListaDeProdutos.asmx/criarProdutoComCodigo";
+		url="http://192.168.1.99/Servidor/ListaDeProdutos.asmx/criarProdutoComCodigo";
 		data="{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',idLista:'"+idLista+"',idProduto:'"+idProduto+"',marca:'"+marca+"',nome:'"+nomeDoProduto+"',unidade:'"+unidade+"',embalagem:'"+embalagem+"',codigo:'"+codigoDeBarras+"'tipoCod:'"+tipoCod+"',quantidade:'"+quantidade+"'}";
 	}	
 	
@@ -364,64 +364,6 @@ function adicionarIdProdutoLocalStorage(id){
 //____________________________Id Produto no localStorage___________________//
 function pegarIdProdutoEditar(id){
 	window.localStorage.idProdutoEditar=id;	
-}
-
-//---------- Construção de HTML no javascript --------------//
-function listaEstilo(produto)
-{
-	var divPrincipal = document.createElement("div");
-		var divProduto = document.createElement("div");
-		var divRole = document.createElement("div");
-		var iconEdit = document.createElement('div');
-		var h4 = document.createElement("h4");
-		var a = document.createElement("a");
-		var img = document.createElement("img");
-		var nomeProduto = document.createElement("a");
-		
-		//--estilos--
-		divPrincipal.setAttribute("class","panel panel-default");
-		divProduto.setAttribute("class","panel-heading");
-		divRole.setAttribute("style", "display: block;");
-		divRole.setAttribute("style", "width: 93% !important;");
-		divRole.setAttribute("onclick", "adicionarIdProdutoLocalStorage('"+produto.id_produto+"')");
-		divRole.setAttribute("data-target", "#adicionar_quantidade_de_produto_na_lista");
-		divRole.setAttribute("data-toggle", "modal");	
-		
-		iconEdit.setAttribute("class", "iconEdit");
-		iconEdit.setAttribute("style", "bottom: 32px;");
-		iconEdit.setAttribute("onclick", "pegarIdProdutoEditar('"+produto.id_produto+"')");
-		iconEdit.setAttribute("data-target", "#editar_produto");
-		iconEdit.setAttribute("data-toggle", "modal");
-		
-		h4.setAttribute("class","panel-title");
-		a.setAttribute("style","color: #ffb503;");
-		
-		img.setAttribute("src","assets/img/setaFechada.png");
-		img.setAttribute("width","30px");
-		img.setAttribute("style","color: #ffb503;");
-		
-		nomeProduto.setAttribute("class","lista-pesquisa");		
-			if(window.localStorage.pesquisarPrincipal == "pesquisar")
-			nomeProduto.setAttribute("href","visualizar-itens.html");
-		
-		nomeProduto.setAttribute("onclick","itemVisializar('"+produto.id_produto+"');");		
-		nomeProduto.innerHTML = produto.nome;
-		
-		//--------//
-		divPrincipal.appendChild(divProduto);
-		divPrincipal.appendChild(divRole);
-		divPrincipal.appendChild(h4);
-		divPrincipal.appendChild(a);
-		divPrincipal.appendChild(img);
-		divProduto.appendChild(divRole);
-		divProduto.appendChild(iconEdit);
-		divRole.appendChild(h4);
-		h4.appendChild(a);
-		h4.appendChild(nomeProduto);
-		a.appendChild(img);
-		
-		var pai = document.getElementById("referencia");
-		pai.appendChild(divPrincipal);	
 }
 
 //______ listar itens ________//

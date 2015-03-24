@@ -10,7 +10,7 @@ function fazerLogin(){
     if (email!='' && senha!=''){     
 		$.ajax({
             type: 'POST'
-            , url: "http://192.168.56.1/Servidor/Usuario.asmx/fazerLogin"
+            , url: "http://192.168.1.99/Servidor/Usuario.asmx/fazerLogin"
             , contentType: 'application/json; charset=utf-8'
             , dataType: 'json'
             , data: "{email:'"+email+"',senha:'"+senha+"',token:'"+token+"'}"
@@ -47,7 +47,7 @@ function verificarLogin(lugar) {
 		
 	$.ajax({
 		type: 'POST'
-		, url: "http://192.168.56.1/Servidor/Usuario.asmx/verificarLogin"
+		, url: "http://192.168.1.99/Servidor/Usuario.asmx/verificarLogin"
 		, contentType: 'application/json; charset=utf-8'
 		, dataType: 'json'
 		, data: "{idUsuario:'"+idUsuario+"',token:'"+token+"'}"
@@ -77,7 +77,7 @@ function logout(){
 	var token= window.localStorage.UsuarioToken;
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Usuario.asmx/logout"
+        , url: "http://192.168.1.99/Servidor/Usuario.asmx/logout"
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
         , data: "{idUsuario:'"+id+"',token:'"+token+"'}"
@@ -107,7 +107,7 @@ function recuperarSenha(){
 	
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Usuario.asmx/recuperarSenha"
+        , url: "http://192.168.1.99/Servidor/Usuario.asmx/recuperarSenha"
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
         , data: "{emailUsuario:'"+emailUsuario+"'}"
@@ -153,7 +153,7 @@ function cadastrarUsuario() {
 		if(senha == confirmar){		
 			$.ajax({
                 type: 'POST'
-                , url: "http://192.168.56.1/Servidor/Usuario.asmx/cadastrarUsuario"
+                , url: "http://192.168.1.99/Servidor/Usuario.asmx/cadastrarUsuario"
 				, crossDomain:true
                 , contentType: 'application/json; charset=utf-8'
                 , dataType: 'json'
@@ -214,7 +214,7 @@ function atualizarSenhaUsuario() {
 		if(novaSenha == confirmar){		
 			$.ajax({
                 type: 'POST'
-                , url: "http://192.168.56.1/Servidor/Usuario.asmx/atualizarSenhaUsuario"
+                , url: "http://192.168.1.99/Servidor/Usuario.asmx/atualizarSenhaUsuario"
 				, crossDomain:true
                 , contentType: 'application/json; charset=utf-8'
                 , dataType: 'json'

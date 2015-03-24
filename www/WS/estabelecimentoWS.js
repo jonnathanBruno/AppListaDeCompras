@@ -26,7 +26,7 @@ function cadastrarEstabelecimento(){
 			if (nomeEstabelecimento != '' || bairroEstabelecimento!= '' || cidadeEstabelecimento!= '' || unidadeEstabelecimento!= ''){ 	
 				$.ajax({
 					type: 'POST'
-					, url: "http://192.168.56.1/Servidor/Estabelecimento.asmx/cadastrarEstabelecimento"
+					, url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/cadastrarEstabelecimento"
 					, crossDomain:true
 					, contentType: 'application/json; charset=utf-8'
 					, dataType: 'json'
@@ -59,7 +59,7 @@ function listarEstabelecimento(){
 
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Estabelecimento.asmx/listarEstabelecimento"
+        , url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/listarEstabelecimento"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -105,7 +105,7 @@ function editarEstabelecimento(flagEstab){
 		if (nomeEstabelecimento != '' || bairroEstabelecimento!= '' || cidadeEstabelecimento!= '' || unidadeEstabelecimento!= ''){ 	
 			$.ajax({
 				type: 'POST'
-				, url: "http://192.168.56.1/Servidor/Estabelecimento.asmx/editarEstabelecimento"
+				, url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/editarEstabelecimento"
 				, crossDomain:true
 				, contentType: 'application/json; charset=utf-8'
 				, dataType: 'json'
@@ -142,7 +142,7 @@ function autoCompleteEstabelecimento(){
 	var nomeEstabelecimento = $("#nomeEstab").val();
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/Estabelecimento.asmx/autoCompleteEstabelecimento"
+        , url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/autoCompleteEstabelecimento"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -171,7 +171,7 @@ function visualizarEstabelecimento(){
 	
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.56.1/Servidor/ListaDeProdutos.asmx/retornarItensPorEstabelecimento"
+        , url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/retornarItensPorEstabelecimento"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
