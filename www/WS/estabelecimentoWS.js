@@ -26,7 +26,7 @@ function cadastrarEstabelecimento(){
 			if (nomeEstabelecimento != '' || bairroEstabelecimento!= '' || cidadeEstabelecimento!= '' || unidadeEstabelecimento!= ''){ 	
 				$.ajax({
 					type: 'POST'
-					, url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/cadastrarEstabelecimento"
+					, url: "http://192.168.1.102/Servidor/Estabelecimento.asmx/cadastrarEstabelecimento"
 					, crossDomain:true
 					, contentType: 'application/json; charset=utf-8'
 					, dataType: 'json'
@@ -59,7 +59,7 @@ function listarEstabelecimento(){
 
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/listarEstabelecimento"
+        , url: "http://192.168.1.102/Servidor/Estabelecimento.asmx/listarEstabelecimento"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -97,6 +97,8 @@ function editarEstabelecimento(flagEstab){
 	var idEstabelecimento = parseInt(window.localStorage.idEstabelecimento);
 	var idUsuario = ID_USUARIO;
 	var token = TOKEN;
+	var latitude = window.localStorage.lat;
+	var longitude = window.localStorage.lon;
 	
 	var nonNumbers = /\D/;
 	if(nonNumbers.test(unidadeEstabelecimento)){
@@ -105,11 +107,11 @@ function editarEstabelecimento(flagEstab){
 		if (nomeEstabelecimento != '' || bairroEstabelecimento!= '' || cidadeEstabelecimento!= '' || unidadeEstabelecimento!= ''){ 	
 			$.ajax({
 				type: 'POST'
-				, url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/editarEstabelecimento"
+				, url: "http://192.168.1.102/Servidor/Estabelecimento.asmx/editarEstabelecimento"
 				, crossDomain:true
 				, contentType: 'application/json; charset=utf-8'
 				, dataType: 'json'
-				, data: "{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',id:'"+idEstabelecimento+"',nome:'"+nomeEstabelecimento+"',bairro:'"+bairroEstabelecimento+"',cidade:'"+cidadeEstabelecimento+"',numero:'"+unidadeEstabelecimento+"'}"
+				, data: "{idUsuario:'"+ID_USUARIO+"',token:'"+TOKEN+"',id:'"+idEstabelecimento+"',nome:'"+nomeEstabelecimento+"',bairro:'"+bairroEstabelecimento+"',cidade:'"+cidadeEstabelecimento+"',numero:'"+unidadeEstabelecimento+"',latitude:'"+latitude+"',longitude:'"+longitude+"'}"
 				, success: function (data, status){                    
 					var retorno = $.parseJSON(data.d);               
 					if(typeof(retorno.erro) === 'undefined'){
@@ -142,7 +144,7 @@ function autoCompleteEstabelecimento(){
 	var nomeEstabelecimento = $("#nomeEstab").val();
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/autoCompleteEstabelecimento"
+        , url: "http://192.168.1.102/Servidor/Estabelecimento.asmx/autoCompleteEstabelecimento"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
@@ -171,7 +173,7 @@ function visualizarEstabelecimento(){
 	
 	$.ajax({
         type: 'POST'
-        , url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/retornarItensPorEstabelecimento"
+        , url: "http://192.168.1.102/Servidor/ListaDeProdutos.asmx/retornarItensPorEstabelecimento"
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'

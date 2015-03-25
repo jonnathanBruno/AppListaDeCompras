@@ -15,7 +15,7 @@ function abrirModalCheckin(flagCheckin){
 	if(flagCheckin == "principal" || flagCheckin=="estabelecimento"){
 		$.ajax({
 			type: 'POST'
-			, url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/listarListas" 
+			, url: "http://192.168.1.102/Servidor/ListaDeProdutos.asmx/listarListas" 
 			, crossDomain:true
 			, contentType: 'application/json; charset=utf-8'
 			, dataType: 'json'						
@@ -53,7 +53,7 @@ function abrirModalCheckin(flagCheckin){
 	if(flagCheckin == "principal" || flagCheckin=="lista"){
 		$.ajax({
 			type: 'POST'
-			, url: "http://192.168.1.99/Servidor/Estabelecimento.asmx/listarEstabelecimento"
+			, url: "http://192.168.1.102/Servidor/Estabelecimento.asmx/listarEstabelecimento"
 			, crossDomain:true
 			, contentType: 'application/json; charset=utf-8'
 			, dataType: 'json'
@@ -143,7 +143,7 @@ function retornarProdutosCheckIn(){
 
 	$.ajax({																		
         type: 'POST'
-        , url: "http://192.168.1.99/Servidor/ListaDeProdutos.asmx/retornarItens" 
+        , url: "http://192.168.1.102/Servidor/ListaDeProdutos.asmx/retornarItens" 
 		, crossDomain:true
         , contentType: 'application/json; charset=utf-8'
         , dataType: 'json'
